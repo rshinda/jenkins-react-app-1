@@ -9,7 +9,7 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                sh "sudo cp -r ${WORKSPACE}/build/ /var/www/jenkins-react-app/"
+                 sh ' cp ./App.js /home/ubuntu/jenkins-react-app-1/src '
             }
         }
     }
