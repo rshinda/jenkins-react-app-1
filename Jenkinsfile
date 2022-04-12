@@ -9,7 +9,7 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                 sh ' cp ./App.js /home/ubuntu/jenkins-react-app-1/src '
+                 sh ' cp ./src/App.js /home/ubuntu/jenkins-react-app-1/src '
             }
         }
     }
