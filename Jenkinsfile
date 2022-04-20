@@ -10,7 +10,7 @@ pipeline {
         }
         stage("Deploy") {
             steps {
-                 sh 'sudo cp /var/lib/jenkins/workspace/jenkinsreactapp/src/App.js /home/ec2-user/jenkins-react-app-1/src/App.js'
+                 sh 'sudo cp ./src/App.js /home/ec2-user/jenkins-react-app-1/src/App.js'
             }
         }
     }
