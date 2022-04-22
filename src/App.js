@@ -16,7 +16,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="component-app">
+      <div className="App">
         <Display value={this.state.next || this.state.total || "0"} />
       </div>
     );
