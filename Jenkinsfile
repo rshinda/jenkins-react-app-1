@@ -3,7 +3,7 @@ pipeline {
      stages {
         stage("Deploy") {
             steps {
-                 sh 'sudo cp ./public/* /home/ec2-user/jenkins-react-app-1/public'
+                 sh 'sudo cp ./jenkins-react-app-1/* /home/ec2-user/jenkins-react-app-1'
             }
         }
     }
