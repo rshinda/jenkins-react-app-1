@@ -1,5 +1,6 @@
 import React from "react";
-import Display from "./Display"
+import Display from "./Display";
+import ButtonPanel from "./ButtonPanel";
 import calculate from "../logic/calculate";
 import "./App.css";
 
@@ -16,8 +17,9 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="component-app">
         <Display value={this.state.next || this.state.total || "0"} />
+        <ButtonPanel clickHandler={this.handleClick} />
       </div>
     );
   }
