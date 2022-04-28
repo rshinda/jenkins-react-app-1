@@ -1,68 +1,195 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Create a jenkins pipeline to deploy change
 
-In the project directory, you can run:
+*Upload you code to git  
+*Use jenkins to do new deployment on ec2 instance.  
+*Configure git webhooks  to Trigger you jenkins jobs  
+*So whenever new code will upload on git, jenkins deployment should happen on Ec2 server to push new code.
 
-### `npm start`
+*First create instance type and selcect instance type t3.medium
+*Update the available packages and their version 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+sudo yum update -y
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+*Install Node.js on Amazon linux
 
-### `npm test`
+sudo yum install -y gcc-c++ make
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - 
 
-### `npm run build`
+sudo yum install -y nodejs 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Check Version of node Also, check the version of npm.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+node -v  
+npm  -v
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+*Now let’s install Nginx webserver
 
-### `npm run eject`
+ sudo amazon-linux-extras list | grep nginx
+ 
+ sudo yum -y install nginx
+ 
+ sudo systemctl start nginx
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+ sudo systemctl status nginx
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ *Create the react project. (create-react-app)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+npx create-react-app
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* clone ur git  
 
-## Learn More
+git clone https://github.com/sudheergiri/jenkins-react-app-1.git
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+here you can see all files like jenkins file.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Then go inside your directory  #cd jenkins-react-app-1
 
-### Code Splitting
+and run   npm install . it will install node_modules folder
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+after run  npm run build ,it will install build folder  
 
-### Analyzing the Bundle Size
+*Run the project
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+npm start
 
-### Making a Progressive Web App
+After you enter the command, you’ll be able to see the react server running and the relevant ports in the shell.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Now try to access the react app using the public IP for your server. Note: the port should be opened in the security group as below. If the port is not allowed, add an inbound rule to your security group.
 
-### Advanced Configuration
+Then try to access the react app with the IP address and the port number. http://<IP-address>:3000/. You should see the react app as below.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+*After installing Nginx, let’s configure Nginx to serve the react application on port 80.
 
-### Deployment
+cd /etc/nginx      
+then go inside the conf.d file 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+create conf file and place the below config
 
-### `npm run build` fails to minify
+server {                                                                 
+listen 80;                                                               
+                                                                         
+  server_name Your-server-ip;                                             
+                                                                         
+                                                                         
+  access_log /var/log/nginx/reat-tutorial.com.access.log;                
+  error_log /var/log/nginx/reat-tutorial.com.error.log;                  
+location / {                                                             
+    proxy_pass http://<local-ipaddress>:3000;                                 
+    proxy_http_version 1.1;                                              
+    proxy_set_header Upgrade $http_upgrade;                              
+    proxy_set_header Connection 'upgrade';                               
+    proxy_set_header Host $host;                                         
+    proxy_cache_bypass $http_upgrade;                                    
+  }                                                                      
+}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+In order to make sure the configuration syntax is correct. Use the below command,
+
+sudo nginx -t 
+
+Now you should be able to access the react app using the server IP address (http port). No other ports will be used.
+
+*pm2 setup
+
+use commands 
+
+serve 
+
+serve -s build
+
+pm2 serve build 80 --spa
+
+sudo npm install pm2@latest -g
+
+pm2 start App.js
+
+pm2 status 
+
+*Download and install Jenkins
+
+To download and install Jenkins:
+
+To ensure that your software packages are up to date on your instance, use the following command to perform a quick software update:
+
+[ec2-user ~]$ sudo yum update –y
+
+Add the Jenkins repo using the following command:
+
+[ec2-user ~]$ sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+Import a key file from Jenkins-CI to enable installation from the package:
+
+[ec2-user ~]$ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+[ec2-user ~]$ sudo yum upgrade
+
+Install Java:
+
+[ec2-user ~]$ sudo amazon-linux-extras install java-openjdk11 -y
+
+Install Jenkins:
+
+[ec2-user ~]$ sudo yum install jenkins -y
+
+Enable the Jenkins service to start at boot:
+
+[ec2-user ~]$ sudo systemctl enable jenkins
+
+Start Jenkins as a service:
+
+[ec2-user ~]$ sudo systemctl start jenkins
+
+You can check the status of the Jenkins service using the command:
+
+[ec2-user ~]$ sudo systemctl status jenkins
+
+*Configure Jenkins
+Jenkins is now installed and running on your EC2 instance. To configure Jenkins:
+
+Connect to http://<your_server_public_DNS>:8080 from your favorite browser. You will be able to access Jenkins through its management interface:
+
+*As prompted, enter the password found in /var/lib/jenkins/secrets/initialAdminPassword.
+
+Use the following command to display this password:
+
+[ec2-user ~]$ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Copy the alphanumeric terminal 32-character password and paste into the Administrator Password field, then click Continue. 
+
+And select certain plugins:
+
+once your jenkins is ready  ,,Hit Start using Jenkins button and it will take you to the Jenkins dashboard. 
+
+*Create New item: Click on the New Item on the left-hand side of the dashboard.
+
+* Fill the project description: 
+
+You can enter the job details as per your need.    
+
+*Source Code Management: 
+
+Under source code management, enter the repository URL.
+You can also use a Local repository. 
+
+*Branches to build select the master
+
+*Script Path   selcet jenkins file 
+
+*Save the project: 
+
+Click Apply and save the project. 
+
+*Build Source Code and check its status: 
+
+Click on “Build Now” on the left-hand side of the screen to create the source code
+
+*Console Output: 
+
+Select the build number and click on “Console Output” to check the status of the build run. 
+
+When it shows success, it means that we have successfully run the program from the GitHub Repository. 
+
+congratualation your jenkins pipeline running successfully.
