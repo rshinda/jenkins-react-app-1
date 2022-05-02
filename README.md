@@ -24,7 +24,7 @@ Check Version of node Also, check the version of npm.
 node -v  
 npm  -v
 ```
-3) Now let’s install Nginx webserver
+3) Now let us install Nginx webserver
 ```
  sudo amazon-linux-extras list | grep nginx
  
@@ -61,7 +61,7 @@ Run the project
 ```
 npm start
 ```
-After you enter the command, you’ll be able to see the react server running and the relevant ports in the shell.
+After you enter the command, you will be able to see the react server running and the relevant ports in the shell.
 
 Now try to access the react app using the public IP for your server. Note: the port should be opened in the security group as below. If the port is not allowed, add an inbound rule to your security group.
 
