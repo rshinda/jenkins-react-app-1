@@ -67,7 +67,7 @@ Now try to access the react app using the public IP for your server. Note: the p
 
 Then try to access the react app with the IP address and the port number. http://<IP-address>:3000/. You should see the react app as below.
 
-*After installing Nginx, let’s configure Nginx to serve the react application on port 80.
+After installing Nginx, let’s configure Nginx to serve the react application on port 80.
 
 cd /etc/nginx      
 then go inside the conf.d file 
