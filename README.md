@@ -168,7 +168,7 @@ Copy the alphanumeric terminal 32-character password and paste into the Administ
 
 And select certain plugins:
 
-once your jenkins is ready  ,,Hit Start using Jenkins button and it will take you to the Jenkins dashboard. 
+once your jenkins is ready  Hit Start using Jenkins button and it will take you to the Jenkins dashboard. 
 
 9) Create New item: Click on the New Item on the left-hand side of the dashboard.
 
@@ -191,11 +191,11 @@ Click Apply and save the project.
 
 14) Build Source Code and check its status: 
 
-Click on “Build Now” on the left-hand side of the screen to create the source code
+Click on Build Now on the left-hand side of the screen to create the source code
 
 15) Console Output: 
 
-Select the build number and click on “Console Output” to check the status of the build run. 
+Select the build number and click on Console Output to check the status of the build run. 
 
 When it shows success, it means that we have successfully run the program from the GitHub Repository. 
 
