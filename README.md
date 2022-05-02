@@ -1,10 +1,10 @@
 
 # Create a jenkins pipeline to deploy change
 
-*Upload you code to git  
-*Use jenkins to do new deployment on ec2 instance.  
-*Configure git webhooks  to Trigger you jenkins jobs  
-*So whenever new code will upload on git, jenkins deployment should happen on Ec2 server to push new code.
+Upload you code to git  
+Use jenkins to do new deployment on ec2 instance.  
+Configure git webhooks  to Trigger you jenkins jobs  
+So whenever new code will upload on git, jenkins deployment should happen on Ec2 server to push new code.
 
 1) First create instance type and selcect instance type t3.medium
 Update the available packages and their version 
@@ -38,7 +38,7 @@ npm  -v
 ```
 npx create-react-app
 ```
-* clone ur git  
+ clone ur git  
 ```
 git clone https://github.com/sudheergiri/jenkins-react-app-1.git
 ```
@@ -49,15 +49,15 @@ and run
 ```  
  npm install
  ```
-  . it will install node_modules folder
+   it will install node_modules folder
 
 after run
 ```  
 npm run build
 ```
- ,it will install build folder  
+ it will install build folder  
 
-.Run the project
+Run the project
 ```
 npm start
 ```
@@ -172,7 +172,7 @@ once your jenkins is ready  ,,Hit Start using Jenkins button and it will take yo
 
 9) Create New item: Click on the New Item on the left-hand side of the dashboard.
 
-* Fill the project description: 
+ Fill the project description: 
 
 You can enter the job details as per your need.    
 
