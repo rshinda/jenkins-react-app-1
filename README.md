@@ -180,16 +180,16 @@ Hit Start using Jenkins button and it will take you to the Jenkins dashboard.
 
 9) Create New item: Click on the New Item on the left-hand side of the dashboard.
 
- Fill the project description: 
+   Fill the project description: 
 
-You can enter the job details as per your need.    
+   You can enter the job details as per your need.    
 
 10) Source Code Management: 
 
-Under source code management, enter the repository URL.
-You can also use a Local repository.
+    Under source code management, enter the repository URL.
+    You can also use a Local repository.
 ```
-https://github.com/sudheergiri/jenkins-react-app-1.git
+    https://github.com/sudheergiri/jenkins-react-app-1.git
 ```
 11) Branches to build select the master
 
@@ -197,17 +197,17 @@ https://github.com/sudheergiri/jenkins-react-app-1.git
 
 13) Save the project: 
 
-Click Apply and save the project. 
+    Click Apply and save the project. 
 
 14) Build Source Code and check its status: 
 
-Click on Build Now on the left-hand side of the screen to create the source code
+    Click on Build Now on the left-hand side of the screen to create the source code
 
 15) Console Output: 
 
-Select the build number and click on Console Output to check the status of the build run. 
+    Select the build number and click on Console Output to check the status of the build run. 
 
-When it shows success, it means that we have successfully run the program from the GitHub Repository. 
+    When it shows success, it means that we have successfully run the program from the GitHub Repository. 
 
-  Congratualation your jenkins pipeline running successfully.
+   Congratualation your jenkins pipeline running successfully.
 -
