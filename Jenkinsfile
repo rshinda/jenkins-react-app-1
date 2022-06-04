@@ -6,11 +6,11 @@ pipeline {
                     sh "sudo npm install"
                     sh "sudo npm run build"
                }
-          }
-      }   
-        stage("Deploy") {
+          }   
+          stage("Deploy") {
             steps {
                  sh 'sudo cp -r ./* /home/ec2-user/jenkins-react-app-1/'
             }
-        }
+          }
+     }
 }
