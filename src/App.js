@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>welcome to bangalore</h1>
+      <h1>welcome to bidar</h1>
       <h2>This is a jenkins triggered build</h2>
     </div>
   );
